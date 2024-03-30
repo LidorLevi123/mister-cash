@@ -4,13 +4,15 @@ import { useState } from 'react'
 
 import { HomePage } from './pages/HomePage'
 import { ContactPage } from './pages/ContactPage'
+import { StatisticPage } from './pages/StatisticPage'
 
 function App() {
 
     return (
         <>
             {/* <HomePage /> */}
-            <ContactPage />
+            {/* <ContactPage /> */}
+            <StatisticPage />
         </>
     )
 }
