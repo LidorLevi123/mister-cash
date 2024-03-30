@@ -13,12 +13,25 @@ export const contactService = {
     getEmptyContact,
 }
 
-async function query(filterBy = { txt: '' }) {
+async function query(filterBy = { name: '' }) {
     var contacts = await storageService.query(STORAGE_KEY)
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        contacts = contacts.filter(contact => regex.test(contact.name) || regex.test(contact.phone))
+    var regex
+
+    if(filterBy.name) {
+        regex = new RegExp(filterBy.name, 'i')
+        contacts = contacts.filter(contact => regex.test(contact.name))
     }
+
+    if(filterBy.email) {
+        regex = new RegExp(filterBy.email, 'i')
+        contacts = contacts.filter(contact => regex.test(contact.email))
+    }
+
+    if(filterBy.phone) {
+        regex = new RegExp(filterBy.phone, 'i')
+        contacts = contacts.filter(contact => regex.test(contact.phone))
+    }
+
     return contacts
 }
 
@@ -31,7 +44,7 @@ async function remove(contactId) {
 }
 
 async function save(contact) {
-    return contact._id ? 
+    return contact._id ?
         await storageService.put(STORAGE_KEY, contact) :
         await storageService.post(STORAGE_KEY, contact)
 }
