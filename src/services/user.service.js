@@ -4,7 +4,7 @@ export const userService = {
 
 const loggedInUser = {
     name: 'Lidor Levi',
-    coins: '125',
+    coins: 70233,
     moves: []
 }
 

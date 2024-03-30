@@ -2,9 +2,13 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 20px;
+}
+
 body {
     margin: 0;
-    background: linear-gradient(to bottom, $clr-background2, $clr-background1);
+    background: linear-gradient(to bottom, $clr-background1, $clr-background2);
     min-height: 100vh;
 }
 
