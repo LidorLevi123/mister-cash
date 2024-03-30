@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { contactService } from '../services/contact.service.local'
 import { ContactList } from '../cmps/ContactList'
+import { ContactDetails } from './ContactDetails'
 
 export function ContactPage() {
     const [contacts, setContacts] = useState(null)
+    const [selectedContactId, setSelectedContactId] = useState(null)
 
     useEffect(() => {
         loadContacts()
@@ -18,11 +20,19 @@ export function ContactPage() {
         }
     }
 
-    if(!contacts) return <div>Loading...</div>
+    function onBack() {
+        setSelectedContactId(null)
+    }
+
+    if (!contacts) return <div>Loading...</div>
 
     return (
         <section className='contact-page'>
-            <ContactList contacts={contacts} />
+            {
+                selectedContactId ?
+                    <ContactDetails contactId={selectedContactId} onBack={onBack}/> :
+                    <ContactList contacts={contacts} onSetSelectedContact={(contactId) => setSelectedContactId(contactId)} />
+            }
         </section>
     )
 }
