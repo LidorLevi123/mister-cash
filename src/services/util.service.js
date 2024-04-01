@@ -8,7 +8,8 @@ export const utilService = {
     loadFromStorage,
     getDate,
     getDayName,
-    getMonthName
+    getMonthName,
+    loadImg
 }
 
 function makeId(length = 6) {
@@ -91,4 +92,13 @@ function saveToStorage(key, value) {
 function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
+}
+
+function loadImg(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => resolve(img)
+        img.onerror = reject
+        img.src = url
+    })
 }
