@@ -1,0 +1,24 @@
+.app-header {
+    height: $header-height;
+    background-color: $clr-background2;
+
+    .logo {
+        font-size: 2rem;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .main-nav {
+        font-size: 1.1rem;
+
+        a {
+            color: white;
+        }
+        a.active {
+            color: blue;
+        }
+
+        >*:not(:last-child) {
+            margin-inline-end: 1em;
+        }
+    }
+}
