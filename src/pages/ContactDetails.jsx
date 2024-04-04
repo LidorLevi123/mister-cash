@@ -1,16 +1,23 @@
 import { useEffect, useState } from 'react'
 import { contactService } from '../services/contact.service.local'
+import { Link, useParams } from 'react-router-dom'
 
-export function ContactDetails({ contactId, onBack }) {
+export function ContactDetails() {
     const [contact, setContact] = useState(null)
+    const params = useParams()
 
     useEffect(() => {
         loadContact()
     }, [])
 
     async function loadContact() {
-        const contact = await contactService.getById(contactId)
-        if(contact) setContact(contact)
+        try {
+            const { contactId } = params
+            const contact = await contactService.getById(contactId)
+            if(contact) setContact(contact)
+        } catch (err) {
+            console.log('Could not load contact', err)
+        }
     }
 
     if(!contact) return <div>Loading...</div>
@@ -22,7 +29,7 @@ export function ContactDetails({ contactId, onBack }) {
             <h2>{ contact.name }</h2>
             <p>Phone: { contact.phone }</p>
             <p>Email: { contact.email }</p>
-            <button className="btn-back" onClick={onBack}>Back</button>
+            <Link to='/contact'>Back</Link>
         </section>
     )
 }

@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import { contactService } from '../services/contact.service.local'
 import { ContactList } from '../cmps/ContactList'
-import { ContactDetails } from './ContactDetails'
 import { ContactFilter } from '../cmps/ContactFilter'
 
 export function ContactPage() {
     const [contacts, setContacts] = useState(null)
-    const [selectedContactId, setSelectedContactId] = useState(null)
     const [filterBy, setFilterBy] = useState({
         name: '',
         email: '',
@@ -27,7 +25,7 @@ export function ContactPage() {
     }
 
     function onBack() {
-        setSelectedContactId(null)
+
     }
 
     function onChangeFilter(filterBy) {
@@ -38,14 +36,8 @@ export function ContactPage() {
 
     return (
         <section className='contact-page'>
-            {
-                selectedContactId ?
-                    <ContactDetails contactId={selectedContactId} onBack={onBack} /> :
-                    <>
-                        <ContactFilter onChangeFilter={onChangeFilter} filterBy={filterBy}/>
-                        <ContactList contacts={contacts} onSetSelectedContact={(contactId) => setSelectedContactId(contactId)} />
-                    </>
-            }
+            <ContactFilter onChangeFilter={onChangeFilter} filterBy={filterBy} />
+            <ContactList contacts={contacts} />
         </section>
     )
 }

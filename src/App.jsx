@@ -4,6 +4,7 @@ import { AppHeader } from './cmps/AppHeader'
 import { HomePage } from './pages/HomePage'
 import { ContactPage } from './pages/ContactPage'
 import { StatisticPage } from './pages/StatisticPage'
+import { ContactDetails } from './pages/ContactDetails'
 
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -18,6 +19,7 @@ function App() {
                         <Route path='/' element={<HomePage />} />
                         <Route path='/statistic' element={<StatisticPage />} />
                         <Route path='/contact' element={<ContactPage />} />
+                        <Route path='/contact/:contactId' element={<ContactDetails />} />
                     </Routes>
                 </section>
             </Router>
