@@ -30,6 +30,7 @@ export function ContactDetails() {
             <p>Phone: { contact.phone }</p>
             <p>Email: { contact.email }</p>
             <Link to='/contact'>Back</Link>
+            <Link to={`/contact/edit/${contact._id}`}>Edit</Link>
         </section>
     )
 }

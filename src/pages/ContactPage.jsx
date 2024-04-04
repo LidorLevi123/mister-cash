@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { contactService } from '../services/contact.service.local'
 import { ContactList } from '../cmps/ContactList'
 import { ContactFilter } from '../cmps/ContactFilter'
+import { Link } from 'react-router-dom'
 
 export function ContactPage() {
     const [contacts, setContacts] = useState(null)
@@ -37,6 +38,7 @@ export function ContactPage() {
     return (
         <section className='contact-page'>
             <ContactFilter onChangeFilter={onChangeFilter} filterBy={filterBy} />
+            <Link to='/contact/edit'>Add Contact</Link>
             <ContactList contacts={contacts} />
         </section>
     )
