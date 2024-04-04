@@ -25,7 +25,7 @@ export function ContactDetails() {
     return (
         <section className='contact-details'>
             <h1>Contact Details</h1>
-            <img src={`https://robohash.org/${contact._id}.png?set=set5`}></img>
+            <img src={ contact.imgSrc }></img>
             <h2>{ contact.name }</h2>
             <p>Phone: { contact.phone }</p>
             <p>Email: { contact.email }</p>

@@ -36,7 +36,12 @@ async function query(filterBy = { name: '' }) {
 }
 
 async function getById(contactId) {
-    return storageService.get(STORAGE_KEY, contactId)
+    const contact = await storageService.get(STORAGE_KEY, contactId)
+
+    // This is to prevent contact info rendering before the image (Better UX)
+    const img = await utilService.loadImg(`https://robohash.org/${contact._id}.png?set=set5`)
+    contact.imgSrc = img.src
+    return contact
 }
 
 async function remove(contactId) {
