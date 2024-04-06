@@ -7,9 +7,7 @@ import { Link } from 'react-router-dom'
 export function ContactPage() {
     const [contacts, setContacts] = useState(null)
     const [filterBy, setFilterBy] = useState({
-        name: '',
-        email: '',
-        phone: '',
+        term: ''
     })
 
     useEffect(() => {
@@ -23,10 +21,6 @@ export function ContactPage() {
         } catch (err) {
             console.log('Could not GET contacts')
         }
-    }
-
-    function onBack() {
-
     }
 
     function onChangeFilter(filterBy) {

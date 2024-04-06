@@ -29,18 +29,11 @@ export function ContactFilter(props) {
         }))
     }
 
-    const { name, phone, email } = filterBy
+    const { term } = filterBy
 
     return (
         <form className="contact-filter">
-            <label htmlFor="namel">Name</label>
-            <input onChange={handleChange} value={name} type="text" name="name" id="name" placeholder="Enter name..."/>
-
-            <label htmlFor="phone">Phone</label>
-            <input onChange={handleChange} value={phone} type="text" name="phone" id="phone" placeholder="Enter phone number..."/>
-
-            <label htmlFor="email">Email</label>
-            <input onChange={handleChange} value={email} type="text" name="email" id="email" placeholder="Enter email address..."/>
+            <input onChange={handleChange} value={term} type="text" name="term" id="term" placeholder="Search Contacts..."/>
         </form>
     )
 }

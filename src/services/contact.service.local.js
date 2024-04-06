@@ -13,24 +13,14 @@ export const contactService = {
     getEmptyContact,
 }
 
-async function query(filterBy = { name: '' }) {
-    var contacts = await storageService.query(STORAGE_KEY)
-    var regex
+async function query(filterBy = { term: '' }) {
+    let contacts = await storageService.query(STORAGE_KEY)
+    let regex = new RegExp(filterBy.term, 'i')
 
-    if(filterBy.name) {
-        regex = new RegExp(filterBy.name, 'i')
-        contacts = contacts.filter(contact => regex.test(contact.name))
-    }
-
-    if(filterBy.email) {
-        regex = new RegExp(filterBy.email, 'i')
-        contacts = contacts.filter(contact => regex.test(contact.email))
-    }
-
-    if(filterBy.phone) {
-        regex = new RegExp(filterBy.phone, 'i')
-        contacts = contacts.filter(contact => regex.test(contact.phone))
-    }
+        contacts = contacts.filter(contact =>
+            regex.test(contact.name) ||
+            regex.test(contact.phone) ||
+            regex.test(contact.email))
 
     return contacts
 }
