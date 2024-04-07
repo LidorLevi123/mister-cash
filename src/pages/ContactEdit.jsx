@@ -57,7 +57,7 @@ export function ContactEdit() {
     const { name, phone, email } = contact
     return (
         <form className="contact-edit" onSubmit={saveContact}>
-            <label htmlFor="namel">Name</label>
+            <label htmlFor="name">Name</label>
             <input onChange={handleChange} value={name} type="text" name="name" id="name"/>
 
             <label htmlFor="phone">Phone</label>

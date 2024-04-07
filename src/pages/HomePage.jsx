@@ -4,7 +4,7 @@ import { bitcoinService } from '../services/bitcoin.service'
 import { userService } from '../services/user.service'
 
 export function HomePage() {
-    const [user, setUser] = useState(userService.getUser())
+    const [user, setUser] = useState(userService.getLoggedInUser())
     const [btcRate, setBtcRate] = useState(null)
 
     useEffect(() => {
@@ -12,7 +12,7 @@ export function HomePage() {
     }, [])
 
     async function getRate() {
-        const rate = await bitcoinService.getRate(user.coins)
+        const rate = await bitcoinService.getRate(user.balance)
         setBtcRate(rate)
     }
 
@@ -20,8 +20,8 @@ export function HomePage() {
 
     return (
         <section className='home-page'>
-            <h1>Hello { user.name }!</h1>
-            <p>Coins: { user.coins }</p>
+            <h1>Hello { user.fullname }!</h1>
+            <p>Balance: { user.balance }</p>
             <p>BTC Rate: { btcRate }</p>
         </section>
     )
