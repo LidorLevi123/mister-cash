@@ -3,6 +3,7 @@ import { contactService } from '../services/contact.service.local'
 import { Link, useParams } from 'react-router-dom'
 import { TransferFund } from '../cmps/TransferFund'
 import { userService } from '../services/user.service'
+import { MovesList } from '../cmps/MovesList'
 
 export function ContactDetails() {
     const [contact, setContact] = useState(null)
@@ -37,6 +38,8 @@ export function ContactDetails() {
 
     if(!contact) return <div>Loading...</div>
 
+    const user = userService.getLoggedInUser()
+    const userMoves = user.moves.filter(move => move.toId === contact._id).sort((m1, m2)=> m2.at - m1.at)
     return (
         <section className='contact-details'>
             <h1>Contact Details</h1>
@@ -45,6 +48,7 @@ export function ContactDetails() {
             <p>Phone: { contact.phone }</p>
             <p>Email: { contact.email }</p>
             <TransferFund onTransfer={onTransfer}/>
+            <MovesList title={`Moves made with ${contact.name}`} moves={userMoves}/>
             <Link to='/contact'>Back</Link>
             <Link to={`/contact/edit/${contact._id}`}>Edit</Link>
         </section>
