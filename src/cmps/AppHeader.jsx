@@ -4,7 +4,9 @@ export function AppHeader() {
     return (
         <header className="app-header main-layout full">
             <section className="container flex space-between align-center">
-                <div className="logo">MrCash</div>
+                <div className="logo">
+                    <NavLink to='/'>MrCash</NavLink>
+                </div>
                 <nav className="main-nav">
                     <NavLink to='/'>Home</NavLink>
                     <NavLink to='/contact'>Contacts</NavLink>
