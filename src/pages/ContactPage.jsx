@@ -3,25 +3,19 @@ import { contactService } from '../services/contact.service.local'
 import { ContactList } from '../cmps/ContactList'
 import { ContactFilter } from '../cmps/ContactFilter'
 import { Link } from 'react-router-dom'
+import { contactActions } from '../store/actions/contact.actions'
+import { useSelector } from 'react-redux'
 
 export function ContactPage() {
-    const [contacts, setContacts] = useState(null)
     const [filterBy, setFilterBy] = useState({
         term: ''
     })
 
+    const contacts = useSelector(state => state.contactModule.contacts)
+    
     useEffect(() => {
-        loadContacts()
+        contactActions.loadContacts()
     }, [filterBy])
-
-    async function loadContacts() {
-        try {
-            const contacts = await contactService.query(filterBy)
-            setContacts(contacts)
-        } catch (err) {
-            console.log('Could not GET contacts')
-        }
-    }
 
     function onChangeFilter(filterBy) {
         setFilterBy(filterBy)
