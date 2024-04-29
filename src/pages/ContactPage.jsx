@@ -4,7 +4,6 @@ import { ContactFilter } from '../cmps/ContactFilter'
 import { Link } from 'react-router-dom'
 import { contactActions } from '../store/actions/contact.actions'
 import { useSelector } from 'react-redux'
-import { utilService } from '../services/util.service'
 
 export function ContactPage() {
     const contacts = useSelector(state => state.contactModule.contacts)
@@ -16,7 +15,6 @@ export function ContactPage() {
 
     function onChangeFilter(filterBy) {
         contactActions.setFilterBy(filterBy)
-        // utilService.debounce(() => contactActions.setFilterBy(filterBy), 500)
     }
 
     if (!contacts) return <div>Loading...</div>

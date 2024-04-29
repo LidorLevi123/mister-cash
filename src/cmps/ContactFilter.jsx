@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { utilService } from '../services/util.service'
 
 export function ContactFilter(props) {
 
     const [filterBy, setFilterBy] = useState(props.filterBy)
+    const searchFunc = useRef(utilService.debounce(()=> props.onChangeFilter(filterBy), 500))
 
     useEffect(() => {
-        props.onChangeFilter(filterBy)
+        searchFunc.current()
     }, [filterBy])
 
     function handleChange({ target }) {
