@@ -1,24 +1,22 @@
 import { useEffect, useState } from 'react'
-import { contactService } from '../services/contact.service.local'
 import { ContactList } from '../cmps/ContactList'
 import { ContactFilter } from '../cmps/ContactFilter'
 import { Link } from 'react-router-dom'
 import { contactActions } from '../store/actions/contact.actions'
 import { useSelector } from 'react-redux'
+import { utilService } from '../services/util.service'
 
 export function ContactPage() {
-    const [filterBy, setFilterBy] = useState({
-        term: ''
-    })
-
     const contacts = useSelector(state => state.contactModule.contacts)
-    
+    const filterBy = useSelector(state => state.contactModule.filterBy)
+
     useEffect(() => {
         contactActions.loadContacts()
     }, [filterBy])
 
     function onChangeFilter(filterBy) {
-        setFilterBy(filterBy)
+        contactActions.setFilterBy(filterBy)
+        // utilService.debounce(() => contactActions.setFilterBy(filterBy), 500)
     }
 
     if (!contacts) return <div>Loading...</div>
