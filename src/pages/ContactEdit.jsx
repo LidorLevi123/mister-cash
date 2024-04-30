@@ -1,4 +1,5 @@
 import { contactService } from '../services/contact.service.local'
+import { contactActions } from '../store/actions/contact.actions'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -11,8 +12,7 @@ export function ContactEdit() {
         loadContact()
     }, [])
 
-    async function saveContact(ev) {
-        ev.preventDefault()
+    async function saveContact() {
         try {
             const savedContact = await contactService.save(contact)
             navigate(`/contact/${savedContact._id}`)
@@ -22,12 +22,22 @@ export function ContactEdit() {
         }
     }
 
+    async function removeContact() {
+        try {
+            await contactActions.removeContact(contact._id)
+            console.log(`${contact.name} has been removed`)
+            navigate('/contact')
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     async function loadContact() {
         try {
             const { contactId } = params
-            if(!contactId) return
+            if (!contactId) return
             const contact = await contactService.getById(contactId)
-            if(contact) setContact(contact)
+            if (contact) setContact(contact)
         } catch (err) {
             console.log('Could not load contact', err)
         }
@@ -56,17 +66,21 @@ export function ContactEdit() {
 
     const { name, phone, email } = contact
     return (
-        <form className="contact-edit" onSubmit={saveContact}>
+        <section className="contact-edit">
             <label htmlFor="name">Name</label>
-            <input onChange={handleChange} value={name} type="text" name="name" id="name"/>
+            <input onChange={handleChange} value={name} type="text" name="name" id="name" />
 
             <label htmlFor="phone">Phone</label>
-            <input onChange={handleChange} value={phone} type="text" name="phone" id="phone"/>
+            <input onChange={handleChange} value={phone} type="text" name="phone" id="phone" />
 
             <label htmlFor="email">Email</label>
-            <input onChange={handleChange} value={email} type="text" name="email" id="email"/>
+            <input onChange={handleChange} value={email} type="text" name="email" id="email" />
 
-            <button className="btn-save">Save</button>
-        </form>
+            {
+                contact._id &&
+                <button className="btn-remove" onClick={removeContact}>Delete</button>
+            }
+            <button className="btn-save" onClick={saveContact}>Save</button>
+        </section>
     )
 }

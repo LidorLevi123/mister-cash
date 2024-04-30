@@ -4,7 +4,7 @@ import { userService } from '../services/user.service'
 
 export function LoginPage() {
     const [userCreds, setUserCreds] = useState({ fullname: '', email: '', username: '', password: '' })
-    const [isSignUp, setIsSignUp] = useState(false)
+    const [isSignUp, setIsSignUp] = useState(true)
     const navigate = useNavigate()
 
     function handleChange({ target }) {

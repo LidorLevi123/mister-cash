@@ -1,4 +1,5 @@
 export const SET_CONTACTS = 'SET_CONTACTS'
+export const REMOVE_CONTACT = 'REMOVE_CONTACT'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 
 const initialState = {
@@ -14,6 +15,12 @@ export function contactReducer(state = initialState, action = {}) {
             return {
                 ...state,
                 contacts: action.contacts
+            }
+        }
+        case REMOVE_CONTACT: {
+            return {
+                ...state,
+                contacts: state.contacts.filter(contact => contact._id !== action.contactId)
             }
         }
         case SET_FILTER_BY: {
