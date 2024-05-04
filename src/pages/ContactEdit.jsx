@@ -14,7 +14,7 @@ export function ContactEdit() {
 
     async function saveContact() {
         try {
-            const savedContact = await contactService.save(contact)
+            const savedContact = await contactActions.saveContact(contact)
             navigate(`/contact/${savedContact._id}`)
             console.log('Contact saved!')
         } catch (err) {
